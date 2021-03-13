@@ -10,24 +10,24 @@ public class Display {
         this.transactionHistory = "";
     }
 
-    public String getCurrentDisplay() {
-        return currentDisplay;
+    public void printCurrentDisplay() {
+        System.out.println(currentDisplay);
     }
 
     public void setCurrentDisplay(String currentDisplay) {
         this.currentDisplay = currentDisplay;
     }
 
-    public String getMenu() {
-        return menu;
+    public void printMenu() {
+        System.out.println(menu);
     }
 
     public void setMenu(String menu) {
         this.menu = menu;
     }
 
-    public String getTransactionHistory() {
-        return transactionHistory;
+    public void printTransactionHistory() {
+        System.out.println(transactionHistory);
     }
 
     public void setTransactionHistory(String transactionHistory) {
