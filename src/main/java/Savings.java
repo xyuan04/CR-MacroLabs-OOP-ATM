@@ -9,6 +9,7 @@ public class Savings extends Account{
             this.withdraw(transferAmount);
             checkingAccount.deposit(transferAmount);
         }
+        else System.out.println("Non sufficient funds");
 
         return this.getBalance();
     }
@@ -18,6 +19,7 @@ public class Savings extends Account{
             this.withdraw(transferAmount);
             investmentAccount.deposit(transferAmount);
         }
+        else System.out.println("Non sufficient funds");
 
         return this.getBalance();
     }
