@@ -15,6 +15,15 @@ public class Console {
         println(prompt);
         String userInput = scanner.nextLine();
         return userInput;
+
+    }
+
+    public Integer getIntegerInput(String prompt) {
+        Scanner scanner = new Scanner(System.in);
+        println(prompt);
+        Integer userInput = scanner.nextInt();
+        return userInput;
+
     }
 
     public Double getDoubleInput(String prompt) {
@@ -22,6 +31,7 @@ public class Console {
         println(prompt);
         Double userInput = scanner.nextDouble();
         return userInput;
+
     }
 
 }
