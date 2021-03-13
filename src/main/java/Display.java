@@ -1,12 +1,12 @@
 public class Display {
 
     String currentDisplay;
-    String menu;
+    //String menu;
     String transactionHistory;
 
     public Display(){
         this.currentDisplay = "";
-        this.menu = "";
+        //this.menu = "";
         this.transactionHistory = "";
     }
 
@@ -28,7 +28,7 @@ public class Display {
 
 
 
-    public void printMenu() {
+    /*public void printMenu() {
         System.out.println(menu);
     }
 
@@ -40,7 +40,7 @@ public class Display {
     public void menuSP(String menu){
         this.setMenu(menu);
         this.printMenu();
-    }
+    }*/
 
 
 
