@@ -14,7 +14,7 @@ public class Console {
         Scanner scanner = new Scanner(System.in);
         println(prompt);
         String userInput = scanner.nextLine();
-        return userInput;
+        return userInput.toLowerCase();
 
     }
 
