@@ -14,8 +14,14 @@ public class Console {
         Scanner scanner = new Scanner(System.in);
         println(prompt);
         String userInput = scanner.nextLine();
-        return userInput.toLowerCase();
+        return userInput;
+    }
 
+    public String getStringInputNotCaseSensitive(String prompt) {
+        Scanner scanner = new Scanner(System.in);
+        println(prompt);
+        String userInput = scanner.nextLine();
+        return userInput.toLowerCase();
     }
 
     public Integer getIntegerInput(String prompt) {
