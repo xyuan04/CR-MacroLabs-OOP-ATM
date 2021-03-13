@@ -1,5 +1,3 @@
-public class Savings {
-}
 public class Savings extends Account{
 
     public Savings(Integer accountNumber, double balance) {
@@ -11,6 +9,7 @@ public class Savings extends Account{
             this.withdraw(transferAmount);
             checkingAccount.deposit(transferAmount);
         }
+        else System.out.println("Non sufficient funds");
 
         return this.getBalance();
     }
@@ -20,6 +19,7 @@ public class Savings extends Account{
             this.withdraw(transferAmount);
             investmentAccount.deposit(transferAmount);
         }
+        else System.out.println("Non sufficient funds");
 
         return this.getBalance();
     }
