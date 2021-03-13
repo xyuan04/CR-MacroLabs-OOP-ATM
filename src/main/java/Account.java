@@ -15,10 +15,6 @@ public abstract class Account {
         return balance;
     }
 
-    public void setBalance(double balance) {
-        this.balance = balance;
-    }
-
     public double withdraw(double amount) {
         if (balance > amount && balance - amount >= 0) {
             balance -= amount;
@@ -27,7 +23,7 @@ public abstract class Account {
     }
 
     public double deposit(double amount) {
-        return balance + amount;
+        return balance += amount;
     }
 
 
