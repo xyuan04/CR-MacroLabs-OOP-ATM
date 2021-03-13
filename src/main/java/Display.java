@@ -10,6 +10,8 @@ public class Display {
         this.transactionHistory = "";
     }
 
+    /* *****Getters and setters***** */
+
     public void printCurrentDisplay() {
         System.out.println(currentDisplay);
     }
@@ -17,6 +19,14 @@ public class Display {
     public void setCurrentDisplay(String currentDisplay) {
         this.currentDisplay = currentDisplay;
     }
+
+    //set AND print in one
+    public void currentDisplaySP(String currentDisplay){
+        this.setCurrentDisplay(currentDisplay);
+        this.printCurrentDisplay();
+    }
+
+
 
     public void printMenu() {
         System.out.println(menu);
@@ -26,6 +36,14 @@ public class Display {
         this.menu = menu;
     }
 
+    //set AND print in one
+    public void menuSP(String menu){
+        this.setMenu(menu);
+        this.printMenu();
+    }
+
+
+
     public void printTransactionHistory() {
         System.out.println(transactionHistory);
     }
@@ -33,4 +51,15 @@ public class Display {
     public void setTransactionHistory(String transactionHistory) {
         this.transactionHistory = transactionHistory;
     }
+
+
 }
+
+
+
+
+
+
+
+
+
