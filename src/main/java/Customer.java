@@ -44,5 +44,28 @@ public class Customer {
         return accountNumbers;
     }
 
+    public void openCheckingAccount(int accountNumber, double initialDeposit) {
+        Account newAccount = new Checking(accountNumber, initialDeposit);
+        accounts.add(newAccount);
+    }
 
+    public void openSavingsAccount(int accountNumber, double initialDeposit) {
+        Account newAccount = new Savings(accountNumber, initialDeposit);
+        accounts.add(newAccount);
+    }
+
+    public void openInvestmentAccount(int accountNumber, double initialDeposit) {
+        Account newAccount = new Investment(accountNumber, initialDeposit);
+        accounts.add(newAccount);
+    }
+
+    public void closeAccount(Integer accountNumber) {
+        for (int i = 0; i < accounts.size(); i++) {
+            if (accounts.get(i).getAccountNumber() == accountNumber) {
+                if (accounts.get(i).getBalance() == 0) {
+                    accounts.remove(i);
+                }
+            }
+        }
+    }
 }
