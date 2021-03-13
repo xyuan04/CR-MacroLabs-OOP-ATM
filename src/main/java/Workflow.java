@@ -2,10 +2,12 @@ public class Workflow {
 
     Display d;
     Console c;
+    String history;
 
     public Workflow(){
         d = new Display();
         c = new Console();
+        history = "";
     }
 
     public void errorSP(){
@@ -58,6 +60,12 @@ public class Workflow {
         d.currentDisplaySP("What account do you want to check?");
     }
 
+    public void checkResultSP(Account account){
+        d.currentDisplaySP("Your account's current balance is " + account.getBalance());
+    }
+
+
+
     public void withdrawPromptSP(){
         d.currentDisplaySP("What account do you want to withdraw from?");
     }
@@ -69,6 +77,12 @@ public class Workflow {
     public void transferPromptSP(){
         d.currentDisplaySP("What accounts do you want to transfer from and to?");
     }
+
+    public void completeResultSP(){
+        d.currentDisplaySP("Action performed successfully.");
+    }
+
+
 
     public String openPrompt(){
         return c.getStringInputNotCaseSensitive("What kind of account do you want to open?");
