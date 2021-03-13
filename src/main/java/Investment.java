@@ -1,4 +1,4 @@
-/* public class Investment extends Account {
+public class Investment extends Account {
 
     public Investment(Integer accountNumber, double balance) {
         super(accountNumber, balance);
@@ -21,4 +21,4 @@
 
         return this.getBalance();
     }
-} */
+}

@@ -1,4 +1,4 @@
-/*public class Checking extends Account{
+public class Checking extends Account{
 
     public Checking(Integer accountNumber, double balance) {
         super(accountNumber,balance);
@@ -19,4 +19,4 @@
             investmentAccount.deposit(transferAmount);
         }
     }
-}*/
+}

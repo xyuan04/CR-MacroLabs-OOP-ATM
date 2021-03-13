@@ -1,4 +1,4 @@
-/*public class Savings {
+public class Savings {
 }
 public class Savings extends Account{
 
@@ -23,4 +23,4 @@ public class Savings extends Account{
 
         return this.getBalance();
     }
-}*/
+}

@@ -52,6 +52,10 @@ public class Display {
         this.transactionHistory = transactionHistory;
     }
 
+    public void addToTransactionHistory(String snippet){
+        this.transactionHistory = this.transactionHistory + snippet;
+    }
+
 
 }
 
