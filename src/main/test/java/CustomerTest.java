@@ -17,13 +17,14 @@ public class CustomerTest {
             String actualName = xiong.getCustomerName();
             String actualUserName = xiong.getUserName();
             String actualPassword = xiong.getPassword();
-            String account = "242341";
+            String account = "24231 ";
+            String actualAccount = xiong.getAccountNumber();
 
             // : Then
             Assert.assertEquals(customerName, actualName);
             Assert.assertEquals(userName, actualUserName);
             Assert.assertEquals(password, actualPassword);
-            Assert.assertEquals(account, accounts);
+            Assert.assertEquals(account, actualAccount);
 
         }
 
@@ -131,7 +132,7 @@ public class CustomerTest {
             Account checkingAccount = new Checking(32563, 915252956);
             Account[] accounts = new Account[]{checkingAccount};
             // : When
-            String account = "32563";
+            String account = "32563 ";
             Customer wayne = new Customer(customerName, userName, password, accounts);
             String actualAccount = wayne.getAccountNumber();
             // : Then
