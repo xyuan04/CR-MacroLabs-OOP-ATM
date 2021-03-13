@@ -1,19 +1,24 @@
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class Customer {
-
+    private String customerName;
     private String userName;
-    private String passWord;
-    private ArrayList<Customer> accountNumbers = new ArrayList<Customer>();
-    private Integer accountNum;
+    private String password;
+    private List<Account> accounts = new ArrayList<Account>();
 
 
-    public Customer(String userName, String passWord, Integer accountNum){
+    public Customer(String customerName, String userName, String password, Account[] accounts){
+        this.customerName = customerName;
         this.userName = userName;
-        this.passWord = passWord;
-        this.accountNum = accountNum;
+        this.password = password;
+        this.accounts = Arrays.asList(accounts);
     }
+
+    public String getCustomerName(){ return this.customerName;}
+
+    public void setCustomerName(String customerName){ this.customerName = customerName;}
 
     public String getUserName(){
         return this.userName;
@@ -23,21 +28,21 @@ public class Customer {
         this.userName = userName;
     }
 
-    public String getPassWord(){
-        return this.passWord;
+    public String getPassword(){
+        return this.password;
     }
 
-    public void setPassWord(String passWord){
-        this.userName = passWord;
+    public void setPassword(String password){
+        this.password = password;
     }
 
-    public ArrayList<Customer> getAccountNumbers() {
+    public String getAccountNumber() {
+        String accountNumbers = "";
+        for(int i = 0; i < accounts.size(); i++) {
+            accountNumbers += String.format("%s ", accounts.get(i).getAccountNumber());
+        }
         return accountNumbers;
     }
 
-    public void setAccountNumbers(String userName, String passWord, Integer accountNum) {
-        Customer accountNumbers = new Customer(userName, passWord, accountNum);
-        this.accountNumbers.add(accountNumbers);
-    }
 
 }
