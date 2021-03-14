@@ -72,6 +72,10 @@ public class Workflow {
         return c.getIntegerInput("Enter an account:");
     }
 
+    public String enterAccountType(){
+        return c.getStringInputNotCaseSensitive("Enter an account:");
+    }
+
     public void checkPromptSP(){
         d.currentDisplaySP("What account do you want to check?");
     }
