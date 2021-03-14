@@ -40,7 +40,7 @@ public class Workflow {
 
     public String getUserSP(){
         String middleMan = c.getStringInput("Enter username:");
-        d.setTransactionHistory("History of user " + middleMan);
+        d.setTransactionHistory("History of user " + middleMan + "\n");
         return middleMan;
     }
 
@@ -51,7 +51,7 @@ public class Workflow {
 
 
     public void mainMenuSP(Customer customer){
-        d.currentDisplaySP("Welcome, " + customer.getUserName() + "! What do you want to do?\nEnter 1 to check balance\t\t\t\tEnter 2 to transfer\nEnter 3 to withdraw\t\t\t\t\t\tEnter 4 to deposit\nEnter 5 to open a new account\t\t\tEnter 6 to close an account\nEnter 7 to print transaction history\tEnter 8 to log out");
+        d.currentDisplaySP("Welcome, " + customer.getCustomerName() + "! What do you want to do?\nEnter 1 to check balance\t\t\t\tEnter 2 to transfer\nEnter 3 to withdraw\t\t\t\t\t\tEnter 4 to deposit\nEnter 5 to open a new account\t\t\tEnter 6 to close an account\nEnter 7 to print transaction history\tEnter 8 to log out");
     }
 
 
@@ -91,13 +91,13 @@ public class Workflow {
     }
 
     public void completeResultSP(Account account){
-        d.currentDisplaySP("Action performed successfully.");
+        d.currentDisplaySP("Action performed successfully.\n");
         d.addToTransactionHistory("$" + lastAmount + lastAction + "account #" + account.getAccountNumber());
     }
 
     public void completeResultSP(Account account1, Account account2){
-        d.currentDisplaySP("Action performed successfully.");
-        d.addToTransactionHistory("$" + lastAmount + lastAction + "account #" + account1.getAccountNumber() + " to account #" + account2.getAccountNumber());
+        d.currentDisplaySP("Action performed successfully.\n");
+        d.addToTransactionHistory("$" + lastAmount + lastAction + "account #" + account1.getAccountNumber() + " to account #" + account2.getAccountNumber() + "\n");
     }
 
 
@@ -110,9 +110,9 @@ public class Workflow {
         d.currentDisplaySP("What account do you want to close?\nNOTE: The account must be empty.");
     }
 
-
-
-    //history stuff?
+    public void printHistory(){
+        d.printTransactionHistory();
+    }
 
 
 
