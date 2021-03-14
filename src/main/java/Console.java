@@ -27,7 +27,11 @@ public class Console {
     public Integer getIntegerInput(String prompt) {
         Scanner scanner = new Scanner(System.in);
         println(prompt);
-        Integer userInput = scanner.nextInt();
+        while (!scanner.hasNextInt()) {
+            System.out.println("Input is not a number.");
+            scanner.nextLine();
+        }
+        int userInput = scanner.nextInt();
         return userInput;
 
     }
@@ -35,6 +39,10 @@ public class Console {
     public Double getDoubleInput(String prompt) {
         Scanner scanner = new Scanner(System.in);
         println(prompt);
+        while (!scanner.hasNextDouble()) {
+            System.out.println("Input is not a number.");
+            scanner.nextLine();
+        }
         Double userInput = scanner.nextDouble();
         return userInput;
 

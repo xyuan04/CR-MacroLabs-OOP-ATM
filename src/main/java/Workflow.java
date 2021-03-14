@@ -68,8 +68,8 @@ public class Workflow {
 
 
 
-    public String enterAccount(){
-        return c.getStringInputNotCaseSensitive("Enter an account:");
+    public int enterAccount(){
+        return c.getIntegerInput("Enter an account:");
     }
 
     public void checkPromptSP(){
