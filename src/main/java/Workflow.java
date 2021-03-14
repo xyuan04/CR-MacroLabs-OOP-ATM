@@ -17,7 +17,7 @@ public class Workflow {
     }
 
     public void initialWelcomeSP(){
-        d.currentDisplaySP("Welcome to the ATM! Are you a new or returning user?\nEnter 1 for new, 2 for returning.");
+        d.currentDisplaySP("Welcome to the ATM! Are you a new or returning user?\nEnter 1 for new, 2 for returning, 0 to exit atm.");
     }
 
     public Integer getInput(){
@@ -27,7 +27,16 @@ public class Workflow {
 
 
     //include input for customername
+    public void newCustomerNameSP(){
+        d.currentDisplaySP("Enter your Name");
+    }
+    public String getCustomerNameSP(){
+        return c.getStringInput(("Your name here"));
+    }
 
+    public void usernameTakenSP(){
+        d.currentDisplaySP("Username is already taken. Please try again.");
+    }
     //initial opening of an account + deposit. double and string
 
     public void newUserSP(){
