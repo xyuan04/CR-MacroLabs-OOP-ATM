@@ -11,6 +11,8 @@ public class Main {
         test.deposit(screen, xiong);
         test.withdrawal(screen, xiong);
         test.transfer(screen, xiong);
+//        test.check(screen, xiong);
+        test.history(screen);
     }
 
     public void runEngine(){
