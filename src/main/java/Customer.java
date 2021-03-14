@@ -55,19 +55,12 @@ public class Customer {
         return null;
     }
 
-    public void openCheckingAccount(int accountNumber, double initialDeposit) {
-         Checking newAccount = new Checking(accountNumber, initialDeposit);
-         accounts.add(newAccount);
+    public void addAccount(Account account) {
+        accounts.add(account);
     }
 
-    public void openSavingsAccount(int accountNumber, double initialDeposit) {
-        Savings newAccount = new Savings(accountNumber, initialDeposit);
-        accounts.add(newAccount);
-    }
-
-    public void openInvestmentAccount(int accountNumber, double initialDeposit) {
-        Investment newAccount = new Investment(accountNumber, initialDeposit);
-        accounts.add(newAccount);
+    public int getNumberOfAccounts() {
+        return accounts.size();
     }
 
     public void closeAccount(Integer accountNumber) {

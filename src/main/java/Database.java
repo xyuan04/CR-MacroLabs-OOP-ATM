@@ -16,6 +16,15 @@ public class Database {
         return null;
     }
 
+    public static Customer getCustomerByUsername(String username) {
+        for(Customer customer : currentCustomers) {
+            if(customer.getUserName().equals(username)) {
+                return customer;
+            }
+        }
+        return null;
+    }
+
     public static void removeCustomer(Customer customer) {
         currentCustomers.remove(customer);
     }
