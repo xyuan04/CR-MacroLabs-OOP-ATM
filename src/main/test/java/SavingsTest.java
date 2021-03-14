@@ -3,24 +3,59 @@ import org.junit.Assert;
 import org.junit.Test;
 
 public class SavingsTest {
-@Test
 
-// : Given
-    public void testSavingsAccount(){
-    Integer savingsAccountNumber=9999999;
-    double savingsAccountBalance=1300.0;
-    Savings savingsZero=new Savings(savingsAccountNumber,savingsAccountBalance);
-// : When
+    @Test
+    public void testSavingsAccount() {
+        // : Given
+        Integer savingsAccountNumber=9999999;
+        double savingsAccountBalance=1300.0;
+        Savings savingsZero=new Savings(savingsAccountNumber,savingsAccountBalance);
+        // : When
 
-    Integer actualSavingsAccountNumber=savingsZero.getAccountNumber();
-    double actualSavingsAccountBalance=savingsZero.getBalance();
+        Integer actualSavingsAccountNumber=savingsZero.getAccountNumber();
+        double actualSavingsAccountBalance=savingsZero.getBalance();
 
-// : Then
-    Assert.assertEquals(savingsAccountNumber,actualSavingsAccountNumber, 0.00001);
-    Assert.assertEquals(savingsAccountBalance,actualSavingsAccountBalance, 0.00001);
-}
-@Test
-public void testTransferToCheckingAccount(){
+        // : Then
+        Assert.assertEquals(savingsAccountNumber,actualSavingsAccountNumber, 0.00001);
+        Assert.assertEquals(savingsAccountBalance,actualSavingsAccountBalance, 0.00001);
+    }
+
+    @Test
+    public void testDepositToSavings() {
+        // : Given
+        Integer savingsAccountNumber = 888888888;
+        double savingsAccountBalance = 7000.0;
+        Savings savingsZero=new Savings(savingsAccountNumber,savingsAccountBalance);
+
+        // : When
+        savingsZero.deposit(100.0);
+        double expectedSavingsAccountBalance=7100.0;
+        double actualSavingsAccountBalance=savingsZero.getBalance();
+        System.out.println(actualSavingsAccountBalance);
+
+        // : Then
+        Assert.assertEquals(expectedSavingsAccountBalance,actualSavingsAccountBalance, 0.000001);
+    }
+
+    @Test
+    public void testWithdrawFromSavings() {
+        // : Given
+        Integer savingsAccountNumber = 888888888;
+        double savingsAccountBalance = 9000.0;
+        Savings savingsZero=new Savings(savingsAccountNumber,savingsAccountBalance);
+
+        // : When
+        savingsZero.withdraw(6000.0);
+        double expectedSavingsAccountBalance=3000.0;
+        double actualSavingsAccountBalance=savingsZero.getBalance();
+        System.out.println(actualSavingsAccountBalance);
+
+        // : Then
+        Assert.assertEquals(expectedSavingsAccountBalance, actualSavingsAccountBalance,0.00001);
+    }
+
+    @Test
+    public void testTransferToCheckingAccount() {
         // : Given
         Integer savingsAccountNumber = 343234321;
         double savingsAccountBalance = 0.0;
@@ -28,11 +63,12 @@ public void testTransferToCheckingAccount(){
         double checkingAccountBalance=8000.0;
         Checking checkingZero=new Checking(checkingAccountNumber,checkingAccountBalance);
         Savings savingsZero=new Savings(savingsAccountNumber,savingsAccountBalance);
+
         // : When
         double transferAmountToChecking=3000.0;
         double expectedCheckingAccountBalance=8000.0;
         double expectedSavingsAccountBalance=0.0;
-       savingsZero.transferToChecking(checkingZero,transferAmountToChecking);
+        savingsZero.transferToChecking(checkingZero,transferAmountToChecking);
         double actualCheckingAccountBalance=checkingZero.getBalance();
         double actualSavigsAccountBalance=savingsZero.getBalance();
 
@@ -44,8 +80,9 @@ public void testTransferToCheckingAccount(){
         Assert.assertEquals(expectedSavingsAccountBalance,actualSavigsAccountBalance, 0.000001);
 
     }
+
     @Test
-    public void testTransferToInvestment(){
+    public void testTransferToInvestment() {
         // : Given
         Integer savingsAccountNumber = 7777777;
         double savingsAccountBalance = 6000.0;
@@ -69,6 +106,5 @@ public void testTransferToCheckingAccount(){
         // : Then
         Assert.assertEquals(expectedInvestmentAccountBalance,actualInvestmentAccountBalance,0.0000001);
         Assert.assertEquals(expectedSavingsAccountBalance,actualSavingsAccountBalance, 0.000001);
-
     }
 }
