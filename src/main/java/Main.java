@@ -4,19 +4,13 @@
 public class Main {
 
     public static void main(String[] args){
-        Workflow w = new Workflow();
+        Main test = new Main();
+        Workflow screen = new Workflow();
+        Customer xiong = new Customer("xiong", "dj", "gy", new Account[] {new Checking(100, 15000), new Savings(200, 25000), new Investment(300, 50000)});
 
-        Account acct = new Savings(12, 34.0);
-        Account[] accts = new Account[1];
-        accts[0] = acct;
-        Customer customer = new Customer("Hazel", "HD", "45", accts);
-
-        String user = w.getUserSP();
-        w.mainMenuSP(customer);
-        w.withdrawPromptSP();
-        Double dub1 = w.amountPromptSP();
-        w.completeResultSP(accts[0]);
-        w.printHistory();
+        test.deposit(screen, xiong);
+        test.withdrawal(screen, xiong);
+        test.transfer(screen, xiong);
     }
 
     public void runEngine(){
@@ -119,6 +113,75 @@ public class Main {
 
 
 
+    }
+
+    public void withdrawal(Workflow screen, Customer customer) {
+        boolean validAmount = true;
+        screen.withdrawPromptSP();
+
+        Integer withdrawAccount = screen.enterAccount();
+        while(customer.getAccount(withdrawAccount) == null) {
+            System.out.println("Account not on file");
+            withdrawAccount = screen.enterAccount();
+        }
+
+        while (validAmount) {
+            double withdrawalAmount = screen.amountPromptSP();
+            if (customer.getAccount(withdrawAccount).getBalance() > withdrawalAmount) {
+                customer.getAccount(withdrawAccount).withdraw(withdrawalAmount);
+                validAmount = false;
+            } else System.out.println("Non sufficient funds");
+        }
+
+        System.out.println(customer.getAccount(withdrawAccount).getBalance());
+        screen.completeResultSP(customer.getAccount(withdrawAccount));
+    }
+
+    public void deposit(Workflow screen, Customer customer) {
+        screen.depositPromptSP();
+
+        Integer depositAccount = screen.enterAccount();
+        while(customer.getAccount(depositAccount) == null) {
+            System.out.println("Account not on file");
+            depositAccount = screen.enterAccount();
+        }
+
+        double depositAmount = screen.amountPromptSP();
+
+        customer.getAccount(depositAccount).deposit(depositAmount);
+
+        System.out.println(customer.getAccount(depositAccount).getBalance());
+        screen.completeResultSP(customer.getAccount(depositAccount));
+    }
+
+    public void transfer(Workflow screen, Customer customer) {
+        boolean validAmount = true;
+        screen.transferPromptSP();
+
+        Integer withdrawAccount = screen.enterAccount();
+        while(customer.getAccount(withdrawAccount) == null) {
+            System.out.println("Account not on file");
+            withdrawAccount = screen.enterAccount();
+        }
+
+        Integer depositAccount = screen.enterAccount();
+        while(customer.getAccount(depositAccount) == null) {
+            System.out.println("Account not on file");
+            depositAccount = screen.enterAccount();
+        }
+
+        while (validAmount) {
+            double transferAmount = screen.amountPromptSP();
+            if (customer.getAccount(withdrawAccount).getBalance() >= transferAmount) {
+                customer.getAccount(withdrawAccount).withdraw(transferAmount);
+                customer.getAccount(depositAccount).deposit(transferAmount);
+                validAmount = false;
+            } else System.out.println("Non sufficient funds");
+        }
+
+        System.out.println(customer.getAccount(withdrawAccount).getBalance());
+        System.out.println(customer.getAccount(depositAccount).getBalance());
+        screen.completeResultSP(customer.getAccount(withdrawAccount), customer.getAccount(depositAccount));
     }
 
 
