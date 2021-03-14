@@ -15,7 +15,7 @@ public class WorkflowTest {
         String user = w.getUserSP();
         w.mainMenuSP(customer);
         w.withdrawPromptSP();
-        Integer int1 = w.amountPromptSP();
+        Double dub1 = w.amountPromptSP();
         w.completeResultSP(accts[0]);
         w.printHistory();
     }
