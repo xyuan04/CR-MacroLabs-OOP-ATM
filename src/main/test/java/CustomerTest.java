@@ -130,13 +130,16 @@ public class CustomerTest {
             String userName = "NotBatman";
             String password = "zipcode0";
             Account checkingAccount = new Checking(32563, 915252956);
-            Account[] accounts = new Account[]{checkingAccount};
+            Account savingsAccount = new Savings(992223, 750);
+            Account investAccount = new Investment(111, 50000);
+            Account[] accounts = new Account[]{checkingAccount, savingsAccount, investAccount};
             // : When
-            String account = "32563 ";
+            String account = "32563\n" + "992223\n" + "111\n";
             Customer wayne = new Customer(customerName, userName, password, accounts);
             String actualAccount = wayne.getAccountNumber();
+
+            System.out.println(actualAccount);
             // : Then
             Assert.assertEquals(account, actualAccount);
         }
-
     }

@@ -18,7 +18,7 @@ public class Console {
 
     }
 
-    public Integer getIntegerInput(String prompt) {
+    public static Integer getIntegerInput(String prompt) {
         Scanner scanner = new Scanner(System.in);
         println(prompt);
         Integer userInput = scanner.nextInt();
