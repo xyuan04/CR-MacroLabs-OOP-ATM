@@ -5,17 +5,17 @@ public class Main {
 
     public static void main(String[] args) {
         Main test = new Main();
-//        Workflow screen = new Workflow();
+        Workflow screen = new Workflow();
 //        Customer lena = new Customer("Lena", "Bach", "123", new Account[] {new Checking(111,0.0),new Investment(222,800)} );
 //       // test.closingAccount(screen,lena);
 //     test.openingAccount(screen,lena);
 //        Workflow screen = new Workflow();saving
-//        Customer xiong = new Customer("xiong", "dj", "gy", new Account[] {new Checking(100, 15000), new Savings(200, 25000), new Investment(300, 50000)});
+        Customer xiong = new Customer("xiong", "dj", "gy", new Account[] {new Checking(100, 15000), new Savings(200, 25000), new Investment(300, 50000)});
 //
 //        test.deposit(screen, xiong);
 //        test.withdrawal(screen, xiong);
 //        test.transfer(screen, xiong);
-        test.customerLogin();
+        //test.customerLogin();
     }
 
     public void customerLogin() {
@@ -253,6 +253,26 @@ public class Main {
 
 
     }
+
+
+
+    public void check(Workflow screen, Customer customer){
+
+        screen.checkPromptSP();
+        while(true) {
+            try {
+                Integer acctNumber = screen.enterAccount();
+                screen.checkResultSP(customer.getAccount(acctNumber));
+                break;
+            } catch (Exception e) {
+                screen.errorSP();
+            }
+        }
+
+    }
+
+
+
 
 //    public void withdrawal(Workflow screen, Customer customer) {
 //        boolean validAmount = true;
