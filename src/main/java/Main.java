@@ -121,6 +121,16 @@ public class Main {
 
     }
 
+    public void checkBalance(){
+        Workflow screen = new Workflow();
+        //prints out "Which acct?"
+        screen.checkPromptSP();
+        //The user enters which acct type
+        screen.enterAccount();
+        //Depending on which acct type they enter, this checks the balance of that account
+        //screen.checkResultSP(acct);
+    }
+
 
 
 }
