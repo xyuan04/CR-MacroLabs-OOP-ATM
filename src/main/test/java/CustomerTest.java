@@ -10,14 +10,14 @@ public class CustomerTest {
             String userName = "xyuan";
             String password = "zipcode0";
             Account checkingAccount = new Checking(24231, 23142);
-            Account[] accounts = new Account[]{checkingAccount};
+            Account savingsAccount = new Savings(111, 25000);
 
             // : When
-            Customer xiong = new Customer(customerName, userName, password, accounts);
+            Customer xiong = new Customer(customerName, userName, password, checkingAccount, savingsAccount);
             String actualName = xiong.getCustomerName();
             String actualUserName = xiong.getUserName();
             String actualPassword = xiong.getPassword();
-            String account = "24231\n";
+            String account = "24231\n" + "111\n";
             String actualAccount = xiong.getAccountNumber();
 
             // : Then
