@@ -1,10 +1,15 @@
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class Database {
     private static volatile ArrayList<Customer> currentCustomers = new ArrayList<Customer>();
 
     public static void addCustomer(Customer customer) {
         currentCustomers.add(customer);
+    }
+
+    public static void addMultipleCustomers(Customer... customer) {
+        currentCustomers.addAll(Arrays.asList(customer));
     }
 
     public static Customer getCustomerByName(String name) {

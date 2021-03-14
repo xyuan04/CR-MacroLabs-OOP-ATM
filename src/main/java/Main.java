@@ -2,20 +2,17 @@
  * Created by iyasuwatts on 10/17/17.
  */
 public class Main {
+    private boolean engineOn = true;
 
     public static void main(String[] args) {
         Main test = new Main();
-//        Workflow screen = new Workflow();
-//        Customer lena = new Customer("Lena", "Bach", "123", new Account[] {new Checking(111,0.0),new Investment(222,800)} );
-//       // test.closingAccount(screen,lena);
-//     test.openingAccount(screen,lena);
-//        Workflow screen = new Workflow();saving
-//        Customer xiong = new Customer("xiong", "dj", "gy", new Account[] {new Checking(100, 15000), new Savings(200, 25000), new Investment(300, 50000)});
-//
-//        test.deposit(screen, xiong);
-//        test.withdrawal(screen, xiong);
-//        test.transfer(screen, xiong);
-        test.customerLogin();
+        Workflow screen = new Workflow();
+        Customer xiong = Creator.createCustomer("xiong", "xyuan", "zipcode", new Checking(100, 1500), new Savings(100, 2500), new Investment(10000, 6000));
+        Customer mike = Creator.createCustomer("mike", "ninh", "zipcode", new Checking(101, 1500), new Savings(1001, 2500), new Investment(10001, 6000));
+        Customer hazel = Creator.createCustomer("hazel", "hbecker", "zipcode", new Checking(102, 1500), new Savings(1002, 2500), new Investment(10002, 6000));
+        Customer lena = Creator.createCustomer("lena", "llitouka", "zipcode", new Checking(103, 1500), new Savings(1003, 2500), new Investment(10003, 6000));
+        Database.addMultipleCustomers(xiong, mike, hazel, lena);
+
     }
 
     public void customerLogin() {

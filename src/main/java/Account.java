@@ -23,7 +23,9 @@ public abstract class Account {
     }
 
     public double deposit(double amount) {
-        return balance += amount;
+        if (amount > 0) {
+            return balance += amount;
+        } else return balance;
     }
 
 }
