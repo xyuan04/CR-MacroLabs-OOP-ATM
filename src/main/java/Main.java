@@ -8,7 +8,7 @@ public class Main {
         Workflow screen = new Workflow();
         Customer lena = new Customer("Lena", "Bach", "123", new Account[] {new Checking(111,0.0),new Investment(222,800)} );
        // test.closingAccount(screen,lena);
-     test.openingAccount(screen);
+     test.openingAccount(screen,lena);
 //        Workflow screen = new Workflow();saving
 //        Customer xiong = new Customer("xiong", "dj", "gy", new Account[] {new Checking(100, 15000), new Savings(200, 25000), new Investment(300, 50000)});
 //
@@ -212,31 +212,40 @@ public void closingAccount(Workflow screen, Customer customer) {
     screen.completeResultsNoHistorySP();
 }
 
-    public void openingAccount(Workflow screen) {
+    public void openingAccount(Workflow screen,Customer customer) {
         String uniqAccount = screen.openPrompt();
         boolean validType = true;
         while (validType) {
             if ("checking".equals(uniqAccount)) {
                 double firstCheckingDeposit = screen.amountPromptSP();
                 Checking uniqChecking = Creator.createChecking(firstCheckingDeposit);
+                customer.addAccount(uniqChecking);
                 System.out.println(uniqChecking.getAccountNumber());
                 System.out.println(uniqChecking.getBalance());
+                System.out.println("User accounts: "+"\n"+customer.getAccountNumber());
+                break;
             } else if ("savings".equals(uniqAccount)) {
                 double firstSavingDeposit = screen.amountPromptSP();
                 Checking uniqSaving = Creator.createChecking(firstSavingDeposit);
+                customer.addAccount(uniqSaving);
                 System.out.println(uniqSaving.getAccountNumber());
                 System.out.println(uniqSaving.getBalance());
+                System.out.println("User accounts: "+"\n"+customer.getAccountNumber());
+                break;
             } else if ("investment".equals(uniqAccount)) {
                 double firstInvestmentDeposit = screen.amountPromptSP();
                 Checking uniqInvestment = Creator.createChecking(firstInvestmentDeposit);
+                customer.addAccount(uniqInvestment);
                 System.out.println(uniqInvestment.getAccountNumber());
                 System.out.println(uniqInvestment.getBalance());
+                System.out.println("User accounts: "+"\n"+customer.getAccountNumber());
+                break;
             } else
                 {
                     System.out.println("Not a valid entry. Please type in checking, savings, investment");
-                    break;
+                    uniqAccount = screen.openPrompt();
                 }
-            //System.out.println("User accounts: "+"\n"+lena.getAccountNumber());
+
         }
 
     }
