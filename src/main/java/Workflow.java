@@ -98,7 +98,7 @@ public class Workflow {
 
     public void transferPromptSP(){
         d.currentDisplaySP("What accounts do you want to transfer from and to?");
-        lastAction = " transferred to ";
+        lastAction = " transferred from ";
     }
 
     public Double amountPromptSP(){
@@ -109,7 +109,7 @@ public class Workflow {
 
     public void completeResultSP(Account account){
         d.currentDisplaySP("Action performed successfully.\n");
-        d.addToTransactionHistory("$" + lastAmount + lastAction + "account #" + account.getAccountNumber());
+        d.addToTransactionHistory("$" + lastAmount + lastAction + "account #" + account.getAccountNumber() + "\n");
     }
 
     public void completeResultSP(Account account1, Account account2){
