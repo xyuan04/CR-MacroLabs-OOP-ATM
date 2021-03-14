@@ -21,4 +21,6 @@ public class Investment extends Account {
 
         return this.getBalance();
     }
+
+
 }

@@ -71,4 +71,38 @@ Investment investmentZero=new Investment(expectedAccountNumber,expectedBalance);
         Assert.assertEquals(expectedCheckingAccountBalance,actualCheckingAccountBalance, 0.000001);
 
 }
+@Test
+ public void testWithdrawFromInvestment(){
+// : Given
+    Integer investementAccountNumber = 888888888;
+    double investmentAccountBalance = 9000.0;
+    Investment investmentZero=new Investment(investementAccountNumber,investmentAccountBalance);
+
+// : When
+    investmentZero.withdraw(2000.0);
+    double expectedInvestmentAccountBalance=7000.0;
+    double actualInvestmentAccountBalance=investmentZero.getBalance();
+    System.out.println(actualInvestmentAccountBalance);
+
+// : Then
+    Assert.assertEquals(expectedInvestmentAccountBalance,actualInvestmentAccountBalance, 0.00001);
+}
+
+@Test
+   public void testDepositToInvestment(){
+// : Given
+    Integer investementAccountNumber = 888888888;
+    double investmentAccountBalance = 9000.0;
+    Investment investmentZero=new Investment(investementAccountNumber,investmentAccountBalance);
+
+// : When
+    investmentZero.deposit(1000.0);
+    double expectedInvestmentAccountBalance=10000.0;
+    double actualInvestmentAccountBalance=investmentZero.getBalance();
+    System.out.println(actualInvestmentAccountBalance);
+
+// : Then
+    Assert.assertEquals(expectedInvestmentAccountBalance,actualInvestmentAccountBalance, 0.000001);
+
+}
 }
