@@ -3,19 +3,154 @@
  */
 public class Main {
 
-    public static void main(String[] args){
+    public static void main(String[] args) {
         Main test = new Main();
-        Workflow screen = new Workflow();
-        Customer lena = new Customer("Lena", "Bach", "123", new Account[] {new Checking(111,0.0),new Investment(222,800)} );
-       // test.closingAccount(screen,lena);
-     test.openingAccount(screen,lena);
+//        Workflow screen = new Workflow();
+//        Customer lena = new Customer("Lena", "Bach", "123", new Account[] {new Checking(111,0.0),new Investment(222,800)} );
+//       // test.closingAccount(screen,lena);
+//     test.openingAccount(screen,lena);
 //        Workflow screen = new Workflow();saving
 //        Customer xiong = new Customer("xiong", "dj", "gy", new Account[] {new Checking(100, 15000), new Savings(200, 25000), new Investment(300, 50000)});
 //
 //        test.deposit(screen, xiong);
 //        test.withdrawal(screen, xiong);
 //        test.transfer(screen, xiong);
+        test.customerLogin();
     }
+
+    public void customerLogin() {
+        Workflow screen = new Workflow();
+        screen.initialWelcomeSP();
+        boolean test = true;
+        //Starting screen
+        Integer input = screen.getInput();
+        //1 for new user, 2 for returning. this /just/ takes the number tho
+        while (test)
+            switch (input) {
+                case 1:
+                    createCustomer();
+                    test = false;
+                    break;
+                case 2:
+                    returningCustomer();
+                    test = false;
+                    break;
+                case 0:
+                    System.out.println("Thank you for using this ATM, have a nice day!");
+                    test = false;
+                    break;
+                default:
+                    input = screen.getInput();
+                    System.out.println("Please choose use 1 for new customer or 2 for returning customer, 0 to exit.");
+                    break;
+            }
+    }
+
+    //path 1
+    //prompts new user for the necessary info
+    //name
+    public void createCustomer() {
+        Workflow screen = new Workflow();
+        Customer newCustomer = Creator.createCustomer(null, null, null, null);
+        String newCustomerName = screen.getCustomerNameSP();
+        screen.newUserSP();
+        String newUsername = screen.getUserSP();
+        boolean user = true;
+        while (user)
+            if (Database.getCustomerByUsername(newUsername) != null) {
+                screen.usernameTakenSP();
+                newUsername = screen.getUserSP();
+            } else {
+                newCustomer.setUserName(newUsername);
+                user = false;
+            }
+
+        boolean pass = true;
+
+        while (pass) {
+            String newPassword = screen.getPassSP();
+            String newPasswordConfirm = screen.getPassSP();
+            if (newPasswordConfirm.equals(newPassword)) {
+
+                newCustomer.setPassword(newPassword);
+                pass = false;
+            } else {
+                screen.passwordMismatchSP();
+
+            }
+        }
+
+        System.out.println("Please type Checking, Savings, Investments");
+        openingAccount(screen, newCustomer);
+
+
+
+//        System.out.println("What type of account do you want to open?\n 1 for Checking\n 2 for Savings\n 3 for Investment\n 0 to go back to login");
+//        Integer testing = screen.getInput();
+//
+//        boolean openAcc = true;
+//        while (openAcc)
+//            switch (testing) {
+//                case 1:
+//
+//                case 2:
+//
+//                case 3:
+//
+//                case 0:
+//                    System.out.println("Thank you for using this ATM!");
+//                    openAcc = false;
+//                    customerLogin();
+//                    break;
+//                default:
+//                    testing = screen.getInput();
+//                    System.out.println("Please choose use 1 for checking, 2 for savings, 3 for investment, or 0 to exit to login screen.");
+//                    break;
+//            }
+        }
+
+
+//                //enter password twice. check to see if they match
+
+//            if (newPassword != newPasswordConfirm) {
+//                screen.passwordMismatchSP();
+//
+//            } else if (newPassword == newPasswordConfirm) {
+//                screen.initialAccountOpen();
+//            }
+    //initial deposit
+
+
+    //        path 2
+//        prompts returning user for the necessary info
+//        username
+//
+
+    public void returningCustomer(){
+
+        Workflow screen = new Workflow();
+        Customer mike = new Customer("Mike Ninh",
+                "msn",
+                "123",
+                new Account[]{new Savings(231412, 233)});
+
+        screen.returningUserSP();
+        String userName;
+        String password;
+        if(mike.getUserName() != screen.getUserSP()){
+            System.out.println("Username not found please try again");
+            returningCustomer();
+        }else{
+
+        }
+    }
+
+//        screen.getUserSP();
+//        //password, in while loop, which will kick user out if they fail three times
+//        screen.getPassSP();
+
+
+
 
     public void runEngine(){
         Workflow screen = new Workflow();
