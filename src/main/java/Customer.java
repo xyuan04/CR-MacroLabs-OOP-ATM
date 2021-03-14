@@ -6,14 +6,14 @@ public class Customer {
     private String customerName;
     private String userName;
     private String password;
-    private List<Account> accounts = new ArrayList<Account>();
+    private ArrayList<Account> accounts;
 
 
     public Customer(String customerName, String userName, String password, Account[] accounts){
         this.customerName = customerName;
         this.userName = userName;
         this.password = password;
-        this.accounts = Arrays.asList(accounts);
+        this.accounts = new ArrayList<Account>(Arrays.asList(accounts));
     }
 
     public String getCustomerName(){ return this.customerName;}
@@ -39,23 +39,32 @@ public class Customer {
     public String getAccountNumber() {
         String accountNumbers = "";
         for(int i = 0; i < accounts.size(); i++) {
-            accountNumbers += String.format("%s ", accounts.get(i).getAccountNumber());
+            accountNumbers += String.format("%s\n", accounts.get(i).getAccountNumber());
         }
         return accountNumbers;
     }
 
+    public Account getAccount(int accountNumber) {
+        for (Account account : accounts) {
+            if (account.getAccountNumber() == accountNumber) {
+                return account;
+            }
+        }
+        return null;
+    }
+
     public void openCheckingAccount(int accountNumber, double initialDeposit) {
-        Account newAccount = new Checking(accountNumber, initialDeposit);
-        accounts.add(newAccount);
+         Checking newAccount = new Checking(accountNumber, initialDeposit);
+         accounts.add(newAccount);
     }
 
     public void openSavingsAccount(int accountNumber, double initialDeposit) {
-        Account newAccount = new Savings(accountNumber, initialDeposit);
+        Savings newAccount = new Savings(accountNumber, initialDeposit);
         accounts.add(newAccount);
     }
 
     public void openInvestmentAccount(int accountNumber, double initialDeposit) {
-        Account newAccount = new Investment(accountNumber, initialDeposit);
+        Investment newAccount = new Investment(accountNumber, initialDeposit);
         accounts.add(newAccount);
     }
 

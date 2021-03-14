@@ -17,7 +17,7 @@ public class CustomerTest {
             String actualName = xiong.getCustomerName();
             String actualUserName = xiong.getUserName();
             String actualPassword = xiong.getPassword();
-            String account = "24231 ";
+            String account = "24231\n";
             String actualAccount = xiong.getAccountNumber();
 
             // : Then
@@ -130,13 +130,124 @@ public class CustomerTest {
             String userName = "NotBatman";
             String password = "zipcode0";
             Account checkingAccount = new Checking(32563, 915252956);
-            Account[] accounts = new Account[]{checkingAccount};
+            Account savingsAccount = new Savings(992223, 750);
+            Account investAccount = new Investment(111, 50000);
+            Account[] accounts = new Account[]{checkingAccount, savingsAccount, investAccount};
             // : When
-            String account = "32563 ";
+            String account = "32563\n" + "992223\n" + "111\n";
             Customer wayne = new Customer(customerName, userName, password, accounts);
             String actualAccount = wayne.getAccountNumber();
+
+            System.out.println(actualAccount);
             // : Then
             Assert.assertEquals(account, actualAccount);
         }
 
+    @Test
+    public void testOpenCheckingAccount() {
+        // : Given
+        String customerName = "Bruce Wayne";
+        String userName = "NotBatman";
+        String password = "zipcode0";
+        Account checkingAccount = new Checking(32563, 915252956);
+        Account savingsAccount = new Savings(992223, 750);
+        Account investAccount = new Investment(111, 50000);
+        Account[] accounts = new Account[]{checkingAccount, savingsAccount, investAccount};
+        // : When
+        String account = "32563\n" + "992223\n" + "111\n" + "69420\n";
+        Customer wayne = new Customer(customerName, userName, password, accounts);
+        wayne.openCheckingAccount(69420, 50000);
+        String actualAccount = wayne.getAccountNumber();
+
+        System.out.println(actualAccount);
+        // : Then
+        Assert.assertEquals(account, actualAccount);
     }
+
+    @Test
+    public void testOpenSavingsAccount() {
+        // : Given
+        String customerName = "Bruce Wayne";
+        String userName = "NotBatman";
+        String password = "zipcode0";
+        Account checkingAccount = new Checking(32563, 915252956);
+        Account savingsAccount = new Savings(992223, 750);
+        Account investAccount = new Investment(111, 50000);
+        Account[] accounts = new Account[]{checkingAccount, savingsAccount, investAccount};
+        // : When
+        String account = "32563\n" + "992223\n" + "111\n" + "6969\n";
+        Customer wayne = new Customer(customerName, userName, password, accounts);
+        wayne.openSavingsAccount(6969, 50000);
+        String actualAccount = wayne.getAccountNumber();
+
+        System.out.println(actualAccount);
+        // : Then
+        Assert.assertEquals(account, actualAccount);
+    }
+
+    @Test
+    public void testOpenInvestmentAccount() {
+        // : Given
+        String customerName = "Bruce Wayne";
+        String userName = "NotBatman";
+        String password = "zipcode0";
+        Account checkingAccount = new Checking(32563, 915252956);
+        Account savingsAccount = new Savings(992223, 750);
+        Account investAccount = new Investment(111, 50000);
+        Account[] accounts = new Account[]{checkingAccount, savingsAccount, investAccount};
+        // : When
+        String account = "32563\n" + "992223\n" + "111\n" + "420420\n";
+        Customer wayne = new Customer(customerName, userName, password, accounts);
+        wayne.openInvestmentAccount(420420, 50000);
+        String actualAccount = wayne.getAccountNumber();
+
+        System.out.println(actualAccount);
+        // : Then
+        Assert.assertEquals(account, actualAccount);
+    }
+
+    @Test
+    public void testCloseAccountWithBalance() {
+        // : Given
+        String customerName = "Bruce Wayne";
+        String userName = "NotBatman";
+        String password = "zipcode0";
+        Account checkingAccount = new Checking(32563, 915252956);
+        Account savingsAccount = new Savings(992223, 750);
+        Account investAccount = new Investment(111, 50000);
+        Account[] accounts = new Account[]{checkingAccount, savingsAccount, investAccount};
+        // : When
+        String account = "32563\n" + "992223\n" + "111\n";
+        Customer wayne = new Customer(customerName, userName, password, accounts);
+        wayne.getAccount(111).withdraw(10000);
+        wayne.closeAccount(111);
+        String actualAccount = wayne.getAccountNumber();
+
+        System.out.println(actualAccount);
+        // : Then
+        Assert.assertEquals(account, actualAccount);
+    }
+
+    @Test
+    public void testCloseAccountWithNoBalance() {
+        // : Given
+        String customerName = "Bruce Wayne";
+        String userName = "NotBatman";
+        String password = "zipcode0";
+        Account checkingAccount = new Checking(32563, 915252956);
+        Account savingsAccount = new Savings(992223, 750);
+        Account investAccount = new Investment(111, 50000);
+        Account[] accounts = new Account[]{checkingAccount, savingsAccount, investAccount};
+        // : When
+        String account = "32563\n" + "992223\n";
+        Customer wayne = new Customer(customerName, userName, password, accounts);
+        wayne.getAccount(111).withdraw(50000);
+        wayne.closeAccount(111);
+        String actualAccount = wayne.getAccountNumber();
+
+        System.out.println(actualAccount);
+        // : Then
+        Assert.assertEquals(account, actualAccount);
+    }
+
+}

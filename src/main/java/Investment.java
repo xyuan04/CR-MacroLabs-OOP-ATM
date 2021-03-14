@@ -4,21 +4,17 @@ public class Investment extends Account {
         super(accountNumber, balance);
     }
 
-    public double transferToSavings(Savings savingsAccount, double transferAmount) {
-        if (this.getBalance() > transferAmount && this.getBalance() - transferAmount >= 0) {
+    public void transferToSavings(Savings savingsAccount, double transferAmount) {
+        if (this.getBalance() >= transferAmount) {
             this.withdraw(transferAmount);
             savingsAccount.deposit(transferAmount);
         }
-
-        return this.getBalance();
     }
 
-    public double transferToChecking(Checking checkingAccount, double transferAmount) {
-        if (this.getBalance() > transferAmount && this.getBalance() - transferAmount >= 0) {
+    public void transferToChecking(Checking checkingAccount, double transferAmount) {
+        if (this.getBalance() >= transferAmount) {
             this.withdraw(transferAmount);
             checkingAccount.deposit(transferAmount);
         }
-
-        return this.getBalance();
     }
 }

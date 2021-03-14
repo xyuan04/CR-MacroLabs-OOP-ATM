@@ -16,7 +16,7 @@ public abstract class Account {
     }
 
     public double withdraw(double amount) {
-        if (balance > amount && balance - amount >= 0) {
+        if (balance >= amount) {
             balance -= amount;
         }
         return balance;
@@ -25,6 +25,5 @@ public abstract class Account {
     public double deposit(double amount) {
         return balance += amount;
     }
-
 
 }
