@@ -3,13 +3,13 @@ public class Workflow {
     Display d;
     Console c;
     String lastAction;
-    Integer lastAmount;
+    Double lastAmount;
 
     public Workflow(){
         d = new Display();
         c = new Console();
         lastAction = "";
-        lastAmount = 0;
+        lastAmount = 0.0;
     }
 
     public void errorSP(){
@@ -25,6 +25,10 @@ public class Workflow {
     }
 
 
+
+    //include input for customername
+
+    //initial opening of an account + deposit. double and string
 
     public void newUserSP(){
         d.currentDisplaySP("Input your username, then password twice, or type one lowercase x now to cancel.");
@@ -46,6 +50,14 @@ public class Workflow {
 
     public String getPassSP(){
         return c.getStringInput("Enter password:");
+    }
+
+    public String getNameSP(){
+        return "";
+    }
+
+    public void initialAccountOpen(){
+        //user input double and string
     }
 
 
@@ -85,8 +97,9 @@ public class Workflow {
         lastAction = " transferred to ";
     }
 
-    public Integer amountPromptSP(){
-        lastAmount = c.getIntegerInput("How much?");
+    public Double amountPromptSP(){
+        //try catch
+        lastAmount = c.getDoubleInput("How much?");
         return lastAmount;
     }
 
@@ -100,13 +113,17 @@ public class Workflow {
         d.addToTransactionHistory("$" + lastAmount + lastAction + "account #" + account1.getAccountNumber() + " to account #" + account2.getAccountNumber() + "\n");
     }
 
+    public void completeResultsNoHistorySP(){
+        d.currentDisplaySP("Action performed successfully.\n");
+    }
+
 
 
     public String openPrompt(){
         return c.getStringInputNotCaseSensitive("What kind of account do you want to open?");
     }
 
-    public void closePromptSP(){
+    public void closePrompt(){
         d.currentDisplaySP("What account do you want to close?\nNOTE: The account must be empty.");
     }
 
