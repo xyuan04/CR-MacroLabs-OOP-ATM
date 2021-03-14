@@ -6,13 +6,15 @@ public class Main {
     public static void main(String[] args){
         Main test = new Main();
         Workflow screen = new Workflow();
-        Customer xiong = new Customer("xiong", "dj", "gy", new Account[] {new Checking(100, 15000), new Savings(200, 25000), new Investment(300, 50000)});
-
-        test.deposit(screen, xiong);
-        test.withdrawal(screen, xiong);
-        test.transfer(screen, xiong);
-//        test.check(screen, xiong);
-        test.history(screen);
+        Customer lena = new Customer("Lena", "Bach", "123", new Account[] {new Checking(111,0.0),new Investment(222,800)} );
+       // test.closingAccount(screen,lena);
+     test.openingAccount(screen,lena);
+//        Workflow screen = new Workflow();saving
+//        Customer xiong = new Customer("xiong", "dj", "gy", new Account[] {new Checking(100, 15000), new Savings(200, 25000), new Investment(300, 50000)});
+//
+//        test.deposit(screen, xiong);
+//        test.withdrawal(screen, xiong);
+//        test.transfer(screen, xiong);
     }
 
     public void runEngine(){
@@ -117,99 +119,134 @@ public class Main {
 
     }
 
+//    public void withdrawal(Workflow screen, Customer customer) {
+//        boolean validAmount = true;
+//        screen.withdrawPromptSP();
+//
+//        Integer withdrawAccount = screen.enterAccount();
+//        while(customer.getAccount(withdrawAccount) == null) {
+//            System.out.println("Account not on file");
+//            withdrawAccount = screen.enterAccount();
+//        }
+//
+//        while (validAmount) {
+//            double withdrawalAmount = screen.amountPromptSP();
+//            if (customer.getAccount(withdrawAccount).getBalance() > withdrawalAmount) {
+//                customer.getAccount(withdrawAccount).withdraw(withdrawalAmount);
+//                validAmount = false;
+//            } else System.out.println("Non sufficient funds");
+//        }
+//
+//        System.out.println(customer.getAccount(withdrawAccount).getBalance());
+//        screen.completeResultSP(customer.getAccount(withdrawAccount));
+//    }
+//
+//    public void deposit(Workflow screen, Customer customer) {
+//        screen.depositPromptSP();
+//
+//        Integer depositAccount = screen.enterAccount();
+//        while(customer.getAccount(depositAccount) == null) {
+//            System.out.println("Account not on file");
+//            depositAccount = screen.enterAccount();
+//        }
+//
+//        double depositAmount = screen.amountPromptSP();
+//
+//        customer.getAccount(depositAccount).deposit(depositAmount);
+//
+//        System.out.println(customer.getAccount(depositAccount).getBalance());
+//        screen.completeResultSP(customer.getAccount(depositAccount));
+//    }
+//
+//    public void transfer(Workflow screen, Customer customer) {
+//        boolean validAmount = true;
+//        screen.transferPromptSP();
+//
+//        Integer withdrawAccount = screen.enterAccount();
+//        while(customer.getAccount(withdrawAccount) == null) {
+//            System.out.println("Account not on file");
+//            withdrawAccount = screen.enterAccount();
+//        }
+//
+//        Integer depositAccount = screen.enterAccount();
+//        while(customer.getAccount(depositAccount) == null) {
+//            System.out.println("Account not on file");
+//            depositAccount = screen.enterAccount();
+//        }
+//
+//        while (validAmount) {
+//            double transferAmount = screen.amountPromptSP();
+//            if (customer.getAccount(withdrawAccount).getBalance() >= transferAmount) {
+//                customer.getAccount(withdrawAccount).withdraw(transferAmount);
+//                customer.getAccount(depositAccount).deposit(transferAmount);
+//                validAmount = false;
+//            } else System.out.println("Non sufficient funds");
+//        }
+//
+//        System.out.println(customer.getAccount(withdrawAccount).getBalance());
+//        System.out.println(customer.getAccount(depositAccount).getBalance());
+//        screen.completeResultSP(customer.getAccount(withdrawAccount), customer.getAccount(depositAccount));
+//    }
+public void closingAccount(Workflow screen, Customer customer) {
+    screen.closePrompt();
+    Integer oldAccount=screen.enterAccount();
+    Boolean validAccount=true;
+    while(customer.getAccount(oldAccount)==null){
+        System.out.println("Account not on file");
+        oldAccount=screen.enterAccount();
+    }
+    while(validAccount){
+        if(customer.getAccount(oldAccount).getBalance()==0)
+        {
+            customer.closeAccount(oldAccount);
+            break;
+        }
+        else {
+            System.out.println("Must be empty");
+            System.out.println("Remaining balance: $"+customer.getAccount(oldAccount).getBalance());
+            break;
+        }
 
+    }
+    System.out.println("User accounts: "+"\n"+customer.getAccountNumber());
+    screen.completeResultsNoHistorySP();
+}
 
-    public void check(Workflow screen, Customer customer){
-        screen.checkPromptSP();
-
-        while(true) {
-            try {
-                Integer acctNumber = screen.enterAccount();
-                screen.checkResultSP(customer.getAccount(acctNumber));
+    public void openingAccount(Workflow screen,Customer customer) {
+        String uniqAccount = screen.openPrompt();
+        boolean validType = true;
+        while (validType) {
+            if ("checking".equals(uniqAccount)) {
+                double firstCheckingDeposit = screen.amountPromptSP();
+                Checking uniqChecking = Creator.createChecking(firstCheckingDeposit);
+                customer.addAccount(uniqChecking);
+                System.out.println(uniqChecking.getAccountNumber());
+                System.out.println(uniqChecking.getBalance());
+                System.out.println("User accounts: "+"\n"+customer.getAccountNumber());
                 break;
-            }
-            catch(Exception e){
-                screen.errorSP();
-            }
+            } else if ("savings".equals(uniqAccount)) {
+                double firstSavingDeposit = screen.amountPromptSP();
+                Checking uniqSaving = Creator.createChecking(firstSavingDeposit);
+                customer.addAccount(uniqSaving);
+                System.out.println(uniqSaving.getAccountNumber());
+                System.out.println(uniqSaving.getBalance());
+                System.out.println("User accounts: "+"\n"+customer.getAccountNumber());
+                break;
+            } else if ("investment".equals(uniqAccount)) {
+                double firstInvestmentDeposit = screen.amountPromptSP();
+                Checking uniqInvestment = Creator.createChecking(firstInvestmentDeposit);
+                customer.addAccount(uniqInvestment);
+                System.out.println(uniqInvestment.getAccountNumber());
+                System.out.println(uniqInvestment.getBalance());
+                System.out.println("User accounts: "+"\n"+customer.getAccountNumber());
+                break;
+            } else
+                {
+                    System.out.println("Not a valid entry. Please type in checking, savings, investment");
+                    uniqAccount = screen.openPrompt();
+                }
+
         }
+
     }
-
-    public void history(Workflow screen){
-        screen.printHistory();
-    }
-
-
-
-
-    public void withdrawal(Workflow screen, Customer customer) {
-        boolean validAmount = true;
-        screen.withdrawPromptSP();
-
-        Integer withdrawAccount = screen.enterAccount();
-        while(customer.getAccount(withdrawAccount) == null) {
-            System.out.println("Account not on file");
-            withdrawAccount = screen.enterAccount();
-        }
-
-        while (validAmount) {
-            double withdrawalAmount = screen.amountPromptSP();
-            if (customer.getAccount(withdrawAccount).getBalance() > withdrawalAmount) {
-                customer.getAccount(withdrawAccount).withdraw(withdrawalAmount);
-                validAmount = false;
-            } else System.out.println("Non sufficient funds");
-        }
-
-        System.out.println(customer.getAccount(withdrawAccount).getBalance());
-        screen.completeResultSP(customer.getAccount(withdrawAccount));
-    }
-
-    public void deposit(Workflow screen, Customer customer) {
-        screen.depositPromptSP();
-
-        Integer depositAccount = screen.enterAccount();
-        while(customer.getAccount(depositAccount) == null) {
-            System.out.println("Account not on file");
-            depositAccount = screen.enterAccount();
-        }
-
-        double depositAmount = screen.amountPromptSP();
-
-        customer.getAccount(depositAccount).deposit(depositAmount);
-
-        System.out.println(customer.getAccount(depositAccount).getBalance());
-        screen.completeResultSP(customer.getAccount(depositAccount));
-    }
-
-    public void transfer(Workflow screen, Customer customer) {
-        boolean validAmount = true;
-        screen.transferPromptSP();
-
-        Integer withdrawAccount = screen.enterAccount();
-        while(customer.getAccount(withdrawAccount) == null) {
-            System.out.println("Account not on file");
-            withdrawAccount = screen.enterAccount();
-        }
-
-        Integer depositAccount = screen.enterAccount();
-        while(customer.getAccount(depositAccount) == null) {
-            System.out.println("Account not on file");
-            depositAccount = screen.enterAccount();
-        }
-
-        while (validAmount) {
-            double transferAmount = screen.amountPromptSP();
-            if (customer.getAccount(withdrawAccount).getBalance() >= transferAmount) {
-                customer.getAccount(withdrawAccount).withdraw(transferAmount);
-                customer.getAccount(depositAccount).deposit(transferAmount);
-                validAmount = false;
-            } else System.out.println("Non sufficient funds");
-        }
-
-        System.out.println(customer.getAccount(withdrawAccount).getBalance());
-        System.out.println(customer.getAccount(depositAccount).getBalance());
-        screen.completeResultSP(customer.getAccount(withdrawAccount), customer.getAccount(depositAccount));
-    }
-
-
-
 }
