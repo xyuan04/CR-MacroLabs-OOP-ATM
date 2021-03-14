@@ -1,36 +1,51 @@
 public class Display {
 
     String currentDisplay;
-    String menu;
     String transactionHistory;
 
     public Display(){
         this.currentDisplay = "";
-        this.menu = "";
         this.transactionHistory = "";
     }
 
-    public String getCurrentDisplay() {
-        return currentDisplay;
+    /* *****Getters and setters***** */
+
+    public void printCurrentDisplay() {
+        System.out.println(currentDisplay);
     }
 
     public void setCurrentDisplay(String currentDisplay) {
         this.currentDisplay = currentDisplay;
     }
 
-    public String getMenu() {
-        return menu;
+    //set AND print in one
+    public void currentDisplaySP(String currentDisplay){
+        this.setCurrentDisplay(currentDisplay);
+        this.printCurrentDisplay();
     }
 
-    public void setMenu(String menu) {
-        this.menu = menu;
-    }
 
-    public String getTransactionHistory() {
-        return transactionHistory;
+
+    public void printTransactionHistory() {
+        System.out.println(transactionHistory);
     }
 
     public void setTransactionHistory(String transactionHistory) {
         this.transactionHistory = transactionHistory;
     }
+
+    public void addToTransactionHistory(String snippet){
+        this.transactionHistory = this.transactionHistory + snippet;
+    }
+
+
 }
+
+
+
+
+
+
+
+
+
