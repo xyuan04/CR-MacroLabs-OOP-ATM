@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 public class Motherboard {
 
     public void runEngine(Workflow screen) {
@@ -61,6 +63,7 @@ public class Motherboard {
         Customer newCustomer = Creator.createCustomer(null, null, null, null);
         String newCustomerName = screen.getCustomerNameSP();
         newCustomer.setCustomerName(newCustomerName);
+        if (newCustomerName.equals(0)){customerLogin(screen);}
         screen.newUserSP();
         String newUsername = screen.getUserSP();
         boolean user = true;
@@ -124,8 +127,14 @@ public class Motherboard {
                     history(screen);
                     break;
                 case 8:
+                    wireTransfer(screen, customer);
+                    break;
+                case 9:
                     screen.logOutSP();
                     currentlyUsing = false;
+                    break;
+
+
             }
         }
     }
@@ -261,5 +270,47 @@ public class Motherboard {
 
     public void history(Workflow screen){
         screen.printHistory();
+    }
+
+
+    public void wireTransfer(Workflow screen, Customer customer) {
+
+        Integer withdrawAccount = screen.enterAccount();
+        while(customer.getAccount(withdrawAccount) == null) {
+            System.out.println("Account not on file");
+            withdrawAccount = screen.enterAccount();
+        }
+
+
+        System.out.println("please enter user you want to transfer to");
+        String toTransfer = screen.getUserSP();
+
+        while(Database.getCustomerByUsername(toTransfer) == null) {
+            System.out.println("Account not on file");
+            toTransfer= screen.getUserSP();
+
+        }
+
+        Customer transferUser = Database.getCustomerByUsername(toTransfer);
+
+
+        boolean validAmount = true;
+        screen.transfer2UserPromptSP();
+
+        Integer depositAccount = screen.enterAccount();
+        while(transferUser.getAccount(depositAccount) == null) {
+            System.out.println("Account not on file");
+            depositAccount = screen.enterAccount();
+        }
+
+        while (validAmount) {
+            double transferAmount = screen.amountPromptSP();
+            if (customer.getAccount(withdrawAccount).getBalance() >= transferAmount) {
+                customer.getAccount(withdrawAccount).withdraw(transferAmount);
+                transferUser.getAccount(depositAccount).deposit(transferAmount);
+                validAmount = false;
+            } else System.out.println("Non sufficient funds");
+        }
+        screen.completeResultSP(customer.getAccount(withdrawAccount), transferUser.getAccount(depositAccount));
     }
 }

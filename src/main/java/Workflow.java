@@ -17,7 +17,7 @@ public class Workflow {
     }
 
     public void initialWelcomeSP(){
-        d.currentDisplaySP("Welcome to the ATM! Are you a new or returning user?\nEnter 1 for new, 2 for returning, 0 to exit atm.");
+        d.currentDisplaySP("\nWelcome to the ATM!\nATM maintained by Xiong, Mike, Hazel, and Lena\n\nAre you a new or returning user?\nEnter 1 for new, 2 for returning.");
     }
 
     public Integer getInput(){
@@ -40,7 +40,7 @@ public class Workflow {
     //initial opening of an account + deposit. double and string
 
     public void newUserSP(){
-        d.currentDisplaySP("Input your username, then password twice, or type one lowercase x now to cancel.");
+        d.currentDisplaySP("Input your username, then password twice.");
     }
 
     public void passwordMismatchSP(){
@@ -48,7 +48,7 @@ public class Workflow {
     }
 
     public void returningUserSP(){
-        d.currentDisplaySP("Input your username, then password, or type one lowercase x now to cancel.");
+        d.currentDisplaySP("Input your username, then password.");
     }
 
     public String getUserSP(){
@@ -72,7 +72,7 @@ public class Workflow {
 
 
     public void mainMenuSP(Customer customer){
-        d.currentDisplaySP("Welcome, " + customer.getCustomerName() + "! What do you want to do?\n\n\t\t\tEnter 0 to check account number\nEnter 1 to check balance\t\t\t\tEnter 2 to transfer\nEnter 3 to withdraw\t\t\t\t\t\tEnter 4 to deposit\nEnter 5 to open a new account\t\t\tEnter 6 to close an account\nEnter 7 to print transaction history\tEnter 8 to log out\n");
+        d.currentDisplaySP("Welcome, " + customer.getCustomerName() + "! What do you want to do?\n\nEnter 0 to check account number\t\t\t\t\tEnter 1 to check balance\nEnter 2 to transfer\t\t\t\t\t\t\t\tEnter 3 to withdraw\nEnter 4 to deposit\t\t\t\t\t\t\t\tEnter 5 to open a new account\nEnter 6 to close an account\t\t\t\t\t\tEnter 7 to print transaction history\nEnter 8 to transfer to a different user\t\t\tEnter 9 to log out\n");
     }
 
 
@@ -107,6 +107,11 @@ public class Workflow {
 
     public void transferPromptSP(){
         d.currentDisplaySP("What accounts do you want to transfer from and to?");
+        lastAction = "transferred from";
+    }
+
+    public void transfer2UserPromptSP(){
+        d.currentDisplaySP("What account do you want to transfer to?");
         lastAction = "transferred from";
     }
 
