@@ -112,7 +112,7 @@ public class Workflow {
 
     public Double amountPromptSP(){
         //try catch
-        lastAmount = c.getDoubleInput("How much?");
+        lastAmount = c.getDoubleInput("Transaction amount:");
         return lastAmount;
     }
 

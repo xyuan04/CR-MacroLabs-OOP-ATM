@@ -1,25 +1,8 @@
-public class Xiong {
-    boolean engineOn = true;
-
-    public static void main(String[] args) {
-        Xiong test = new Xiong();
-        Workflow screen = new Workflow();
-        Customer xiong = Creator.createCustomer("xiong", "xyuan", "zipcode", new Checking(100, 1500), new Savings(1000, 2500), new Investment(10000, 6000));
-        Customer mike = Creator.createCustomer("mike", "ninh", "zipcode", new Checking(101, 1500), new Savings(1001, 2500), new Investment(10001, 6000));
-        Customer hazel = Creator.createCustomer("hazel", "hbecker", "zipcode", new Checking(102, 1500), new Savings(1002, 2500), new Investment(10002, 6000));
-        Customer lena = Creator.createCustomer("lena", "llitouka", "zipcode", new Checking(103, 1500), new Savings(1003, 2500), new Investment(10003, 6000));
-        Database.addMultipleCustomers(xiong, mike, hazel, lena);
-
-        while(test.engineOn) {
-            test.runEngine(screen);
-        }
-
-    }
+public class Motherboard {
 
     public void runEngine(Workflow screen) {
         customerLogin(screen);
     }
-
 
     public void customerLogin(Workflow screen) {
         screen.initialWelcomeSP();
@@ -41,13 +24,9 @@ public class Xiong {
                     returningCustomer(screen, currentUser);
                     test = false;
                     break;
-                case 0:
-                    System.out.println("Thank you for using this ATM, have a nice day!");
-                    test = false;
-                    break;
                 default:
                     input = screen.getInput();
-                    System.out.println("Please choose use 1 for new customer or 2 for returning customer, 0 to exit.");
+                    System.out.println("Please choose 1 for new customer or 2 for returning customer.");
                     break;
             }
     }
@@ -85,6 +64,7 @@ public class Xiong {
         screen.newUserSP();
         String newUsername = screen.getUserSP();
         boolean user = true;
+
         while (user)
             if (Database.getCustomerByUsername(newUsername) != null) {
                 screen.usernameTakenSP();
@@ -106,7 +86,7 @@ public class Xiong {
             }
         }
 
-        System.out.println("Please type Checking, Savings, Investments");
+        System.out.println("Which type of account would you like to open:\nChecking\nSavings\nInvestment");
         openingAccount(screen, newCustomer);
         Database.addCustomer(newCustomer);
     }
@@ -165,7 +145,6 @@ public class Xiong {
             } else System.out.println("Non sufficient funds");
         }
 
-        System.out.println(customer.getAccount(withdrawAccount).getBalance());
         screen.completeResultSP(customer.getAccount(withdrawAccount));
     }
 
@@ -181,8 +160,6 @@ public class Xiong {
         double depositAmount = screen.amountPromptSP();
 
         customer.getAccount(depositAccount).deposit(depositAmount);
-
-        System.out.println(customer.getAccount(depositAccount).getBalance());
         screen.completeResultSP(customer.getAccount(depositAccount));
     }
 
@@ -210,9 +187,6 @@ public class Xiong {
                 validAmount = false;
             } else System.out.println("Non sufficient funds");
         }
-
-        System.out.println(customer.getAccount(withdrawAccount).getBalance());
-        System.out.println(customer.getAccount(depositAccount).getBalance());
         screen.completeResultSP(customer.getAccount(withdrawAccount), customer.getAccount(depositAccount));
     }
     public void closingAccount(Workflow screen, Customer customer) {
@@ -224,19 +198,15 @@ public class Xiong {
             oldAccount=screen.enterAccount();
         }
         while(validAccount){
-            if(customer.getAccount(oldAccount).getBalance()==0)
-            {
+            if(customer.getAccount(oldAccount).getBalance()==0) {
                 customer.closeAccount(oldAccount);
                 break;
             }
             else {
-                System.out.println("Must be empty");
-                System.out.println("Remaining balance: $"+customer.getAccount(oldAccount).getBalance());
+                System.out.println("Account balance must be ZERO.\nRemaining balance: $"+customer.getAccount(oldAccount).getBalance());
                 break;
             }
-
         }
-        System.out.println("User accounts: "+"\n"+customer.getAccountNumber());
         screen.completeResultsNoHistorySP();
     }
 
@@ -248,34 +218,25 @@ public class Xiong {
                 double firstCheckingDeposit = screen.amountPromptSP();
                 Checking uniqChecking = Creator.createChecking(firstCheckingDeposit);
                 customer.addAccount(uniqChecking);
-                System.out.println(uniqChecking.getAccountNumber());
-                System.out.println(uniqChecking.getBalance());
                 System.out.println("User accounts: "+"\n"+customer.getAccountNumber());
                 break;
             } else if ("savings".equals(uniqAccount)) {
                 double firstSavingDeposit = screen.amountPromptSP();
                 Checking uniqSaving = Creator.createChecking(firstSavingDeposit);
                 customer.addAccount(uniqSaving);
-                System.out.println(uniqSaving.getAccountNumber());
-                System.out.println(uniqSaving.getBalance());
                 System.out.println("User accounts: "+"\n"+customer.getAccountNumber());
                 break;
             } else if ("investment".equals(uniqAccount)) {
                 double firstInvestmentDeposit = screen.amountPromptSP();
                 Checking uniqInvestment = Creator.createChecking(firstInvestmentDeposit);
                 customer.addAccount(uniqInvestment);
-                System.out.println(uniqInvestment.getAccountNumber());
-                System.out.println(uniqInvestment.getBalance());
                 System.out.println("User accounts: "+"\n"+customer.getAccountNumber());
                 break;
-            } else
-            {
+            } else {
                 System.out.println("Not a valid entry. Please type in checking, savings, investment");
                 uniqAccount = screen.openPrompt();
             }
-
         }
-
     }
 
     public void check(Workflow screen, Customer customer){
