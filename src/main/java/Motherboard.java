@@ -99,6 +99,9 @@ public class Motherboard {
             screen.mainMenuSP(customer);
             Integer input = screen.getInput();
             switch (input) {
+                case 0:
+                    checkAccountNumbers(customer);
+                    break;
                 case 1:
                     check(screen, customer);
                     break;
@@ -237,6 +240,10 @@ public class Motherboard {
                 uniqAccount = screen.openPrompt();
             }
         }
+    }
+
+    public void checkAccountNumbers(Customer customer) {
+        System.out.println(customer.getAccountNumber());
     }
 
     public void check(Workflow screen, Customer customer){

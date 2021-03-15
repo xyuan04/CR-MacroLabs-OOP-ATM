@@ -72,7 +72,7 @@ public class Workflow {
 
 
     public void mainMenuSP(Customer customer){
-        d.currentDisplaySP("Welcome, " + customer.getCustomerName() + "! What do you want to do?\nEnter 1 to check balance\t\t\t\tEnter 2 to transfer\nEnter 3 to withdraw\t\t\t\t\t\tEnter 4 to deposit\nEnter 5 to open a new account\t\t\tEnter 6 to close an account\nEnter 7 to print transaction history\tEnter 8 to log out");
+        d.currentDisplaySP("Welcome, " + customer.getCustomerName() + "! What do you want to do?\n\n\t\t\tEnter 0 to check account number\nEnter 1 to check balance\t\t\t\tEnter 2 to transfer\nEnter 3 to withdraw\t\t\t\t\t\tEnter 4 to deposit\nEnter 5 to open a new account\t\t\tEnter 6 to close an account\nEnter 7 to print transaction history\tEnter 8 to log out\n");
     }
 
 
