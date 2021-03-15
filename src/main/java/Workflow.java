@@ -97,28 +97,28 @@ public class Workflow {
 
     public void withdrawPromptSP(){
         d.currentDisplaySP("What account do you want to withdraw from?");
-        lastAction = " withdrawn from ";
+        lastAction = "withdrawn from";
     }
 
     public void depositPromptSP(){
         d.currentDisplaySP("What account do you want to deposit into?");
-        lastAction = " deposited into ";
+        lastAction = "deposited into";
     }
 
     public void transferPromptSP(){
         d.currentDisplaySP("What accounts do you want to transfer from and to?");
-        lastAction = " transferred to ";
+        lastAction = "transferred from";
     }
 
     public Double amountPromptSP(){
         //try catch
-        lastAmount = c.getDoubleInput("How much?");
+        lastAmount = c.getDoubleInput("Transaction amount:");
         return lastAmount;
     }
 
     public void completeResultSP(Account account){
         d.currentDisplaySP("Action performed successfully.\n");
-        d.addToTransactionHistory("$" + lastAmount + lastAction + "account #" + account.getAccountNumber());
+        d.addToTransactionHistory(String.format("$ %s %s account #%s\n", lastAmount, lastAction, account.getAccountNumber()));
     }
 
     public void completeResultSP(Account account1, Account account2){
