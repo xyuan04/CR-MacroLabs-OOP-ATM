@@ -308,11 +308,13 @@ public class Motherboard {
 
         while (validAmount) {
             double transferAmount = screen.amountPromptSP();
-            if (customer.getAccount(withdrawAccount).getBalance() >= transferAmount) {
+            if(transferAmount <0){
+                System.out.println("Can't transfer funds (Negative amount)");
+            } else if (customer.getAccount(withdrawAccount).getBalance() >= transferAmount) {
                 customer.getAccount(withdrawAccount).withdraw(transferAmount);
                 transferUser.getAccount(depositAccount).deposit(transferAmount);
                 validAmount = false;
-            } else System.out.println("Non sufficient funds");
+            }else System.out.println("Non sufficient funds");
         }
         screen.completeResultSP(customer.getAccount(withdrawAccount), transferUser.getAccount(depositAccount));
     }
