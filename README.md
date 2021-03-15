@@ -11,10 +11,10 @@ Tests should demonstrate proper behavior, and proper handling of misuse (eg. att
   - Numbered options (instead of on-screen buttons)
   - ASCII art welcome but not required
 - Must support account types:
-  - Checking
-  - Savings
-  - Investment
-- Account Actions
+  - Account.Checking
+  - Account.Savings
+  - Account.Investment
+- Account.Account Actions
   - Withdraw from acct
   - Deposit to acct
   - Transfer across accounts (self)

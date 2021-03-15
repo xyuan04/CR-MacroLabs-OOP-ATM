@@ -1,13 +1,17 @@
-public class Checking extends Account{
+package Account;
 
-    public Checking(Integer accountNumber, double balance) {
-        super(accountNumber,balance);
+import Account.Account;
+
+public class Savings extends Account {
+
+    public Savings(Integer accountNumber, double balance) {
+        super(accountNumber, balance);
     }
 
-    public void transferToSavings(Savings savingsAccount, double transferAmount) {
+    public void transferToChecking(Checking checkingAccount, double transferAmount) {
         if (this.getBalance() >= transferAmount) {
             this.withdraw(transferAmount);
-            savingsAccount.deposit(transferAmount);
+            checkingAccount.deposit(transferAmount);
         }
     }
 

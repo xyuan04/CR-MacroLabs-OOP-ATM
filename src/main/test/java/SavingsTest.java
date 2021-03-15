@@ -1,4 +1,6 @@
-import junit.framework.TestCase;
+import Account.Checking;
+import Account.Investment;
+import Account.Savings;
 import org.junit.Assert;
 import org.junit.Test;
 

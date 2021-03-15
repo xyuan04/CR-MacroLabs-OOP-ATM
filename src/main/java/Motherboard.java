@@ -1,4 +1,4 @@
-import java.util.ArrayList;
+import Account.Checking;
 
 public class Motherboard {
 
@@ -42,7 +42,7 @@ public class Motherboard {
         if(newUsername.equals("0")){customerLogin(screen);}
 
         while(Database.getCustomerByUsername(newUsername) == null) {
-            System.out.println("Account not on file");
+            System.out.println("Account.Account not on file");
             newUsername = screen.getUserSP();
         }
 
@@ -98,7 +98,7 @@ public class Motherboard {
             }
         }
 
-        System.out.println("Which type of account would you like to open:\nChecking\nSavings\nInvestment");
+        System.out.println("Which type of account would you like to open:\nAccount.Checking\nAccount.Savings\nAccount.Investment");
         openingAccount(screen, newCustomer);
         Database.addCustomer(newCustomer);
     }
@@ -151,7 +151,7 @@ public class Motherboard {
 
         Integer withdrawAccount = screen.enterAccount();
         while(customer.getAccount(withdrawAccount) == null) {
-            System.out.println("Account not on file");
+            System.out.println("Account.Account not on file");
             withdrawAccount = screen.enterAccount();
         }
 
@@ -171,7 +171,7 @@ public class Motherboard {
 
         Integer depositAccount = screen.enterAccount();
         while(customer.getAccount(depositAccount) == null) {
-            System.out.println("Account not on file");
+            System.out.println("Account.Account not on file");
             depositAccount = screen.enterAccount();
         }
 
@@ -187,13 +187,13 @@ public class Motherboard {
 
         Integer withdrawAccount = screen.enterAccount();
         while(customer.getAccount(withdrawAccount) == null) {
-            System.out.println("Account not on file");
+            System.out.println("Account.Account not on file");
             withdrawAccount = screen.enterAccount();
         }
 
         Integer depositAccount = screen.enterAccount();
         while(customer.getAccount(depositAccount) == null) {
-            System.out.println("Account not on file");
+            System.out.println("Account.Account not on file");
             depositAccount = screen.enterAccount();
         }
 
@@ -212,7 +212,7 @@ public class Motherboard {
         Integer oldAccount=screen.enterAccount();
         Boolean validAccount=true;
         while(customer.getAccount(oldAccount)==null){
-            System.out.println("Account not on file");
+            System.out.println("Account.Account not on file");
             oldAccount=screen.enterAccount();
         }
         while(validAccount){
@@ -221,7 +221,7 @@ public class Motherboard {
                 break;
             }
             else {
-                System.out.println("Account balance must be ZERO.\n" +
+                System.out.println("Account.Account balance must be ZERO.\n" +
                         "Remaining balance: $" +customer.getAccount(oldAccount).getBalance());
                 break;
             }
@@ -283,7 +283,7 @@ public class Motherboard {
 
         Integer withdrawAccount = screen.enterAccount();
         while(customer.getAccount(withdrawAccount) == null) {
-            System.out.println("Account not on file");
+            System.out.println("Account.Account not on file");
             withdrawAccount = screen.enterAccount();
         }
 
@@ -291,7 +291,7 @@ public class Motherboard {
         String toTransfer = screen.getUserSP2();
 
         while(Database.getCustomerByUsername(toTransfer) == null) {
-            System.out.println("Account not on file");
+            System.out.println("Account.Account not on file");
             toTransfer= screen.getUserSP2();
         }
 
@@ -302,7 +302,7 @@ public class Motherboard {
 
         Integer depositAccount = screen.enterAccount();
         while(transferUser.getAccount(depositAccount) == null) {
-            System.out.println("Account not on file");
+            System.out.println("Account.Account not on file");
             depositAccount = screen.enterAccount();
         }
 

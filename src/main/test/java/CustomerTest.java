@@ -1,6 +1,10 @@
+import Account.Account;
 import org.junit.Assert;
 import org.junit.Test;
-
+import Account.Account;
+import Account.Checking;
+import Account.Savings;
+import Account.Investment;
 public class CustomerTest {
 
         @Test
