@@ -17,7 +17,7 @@ public class Workflow {
     }
 
     public void initialWelcomeSP(){
-        d.currentDisplaySP("Welcome to the ATM! Are you a new or returning user?\nEnter 1 for new, 2 for returning, 0 to exit atm.");
+        d.currentDisplaySP("\nWelcome to the ATM!\nATM maintained by Xiong, Mike, Hazel, and Lena\n\nAre you a new or returning user?\nEnter 1 for new, 2 for returning.");
     }
 
     public Integer getInput(){
@@ -28,10 +28,10 @@ public class Workflow {
 
     //include input for customername
     public void newCustomerNameSP(){
-        d.currentDisplaySP("Enter your Name");
+        d.currentDisplaySP("Enter 0 to return back to home page.");
     }
     public String getCustomerNameSP(){
-        return c.getStringInput(("Your name here"));
+        return c.getStringInput(("\nEnter your name here"));
     }
 
     public void usernameTakenSP(){
@@ -40,21 +40,25 @@ public class Workflow {
     //initial opening of an account + deposit. double and string
 
     public void newUserSP(){
-        d.currentDisplaySP("Input your username, then password twice, or type one lowercase x now to cancel.");
+        d.currentDisplaySP("Input your username, then password twice.\nEnter 0 to return back to home page");
     }
 
     public void passwordMismatchSP(){
-        d.currentDisplaySP("Passwords do not match. Please try again.");
+        d.currentDisplaySP("\nPasswords do not match. Please try again.");
     }
 
     public void returningUserSP(){
-        d.currentDisplaySP("Input your username, then password, or type one lowercase x now to cancel.");
+        d.currentDisplaySP("\nInput your username, then password.\nEnter 0 to return back to home page.");
     }
 
     public String getUserSP(){
-        String middleMan = c.getStringInput("Enter username:");
+        String middleMan = c.getStringInput("\nEnter username:");
         d.setTransactionHistory("History of user " + middleMan + "\n");
         return middleMan;
+    }
+    public String getUserSP2(){
+        return c.getStringInput("\nEnter username:");
+
     }
 
     public String getPassSP(){
@@ -72,10 +76,14 @@ public class Workflow {
 
 
     public void mainMenuSP(Customer customer){
-        d.currentDisplaySP("Welcome, " + customer.getCustomerName() + "! What do you want to do?\n\n\t\t\tEnter 0 to check account number\nEnter 1 to check balance\t\t\t\tEnter 2 to transfer\nEnter 3 to withdraw\t\t\t\t\t\tEnter 4 to deposit\nEnter 5 to open a new account\t\t\tEnter 6 to close an account\nEnter 7 to print transaction history\tEnter 8 to log out\n");
+        d.currentDisplaySP("Welcome, " + customer.getCustomerName() + "! What do you want to do?\n" +
+                "\n" +
+                "Enter 0 to check account number\t\t\t\t\tEnter 1 to check balance\n" +
+                "Enter 2 to transfer\t\t\t\t\t\t\t\tEnter 3 to withdraw\n" +
+                "Enter 4 to deposit\t\t\t\t\t\t\t\tEnter 5 to open a new account\n" +
+                "Enter 6 to close an account\t\t\t\t\t\tEnter 7 to print transaction history\n" +
+                "Enter 8 to transfer to a different user\t\t\tEnter 9 to log out\n");
     }
-
-
 
     public int enterAccount(){
         return c.getIntegerInput("Enter an account:");
@@ -93,21 +101,24 @@ public class Workflow {
         d.currentDisplaySP("Your account's current balance is " + account.getBalance());
     }
 
-
-
     public void withdrawPromptSP(){
         d.currentDisplaySP("What account do you want to withdraw from?");
-        lastAction = "withdrawn from";
+        lastAction = " withdrawn from ";
     }
 
     public void depositPromptSP(){
         d.currentDisplaySP("What account do you want to deposit into?");
-        lastAction = "deposited into";
+        lastAction = " deposited into ";
     }
 
     public void transferPromptSP(){
         d.currentDisplaySP("What accounts do you want to transfer from and to?");
-        lastAction = "transferred from";
+        lastAction = " transferred from ";
+    }
+
+    public void transfer2UserPromptSP(){
+        d.currentDisplaySP("What account do you want to transfer to?");
+        lastAction = " transferred from ";
     }
 
     public Double amountPromptSP(){
@@ -130,8 +141,6 @@ public class Workflow {
         d.currentDisplaySP("Action performed successfully.\n");
     }
 
-
-
     public String openPrompt(){
         return c.getStringInputNotCaseSensitive("What kind of account do you want to open?");
     }
@@ -144,11 +153,10 @@ public class Workflow {
         d.printTransactionHistory();
     }
 
-
-
     public void logOutSP(){
         d.currentDisplaySP("Thank you for your business.");
         d.setTransactionHistory("");
     }
 
 }
+

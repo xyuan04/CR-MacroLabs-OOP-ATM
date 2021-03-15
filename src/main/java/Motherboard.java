@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 public class Motherboard {
 
     public void runEngine(Workflow screen) {
@@ -20,7 +22,7 @@ public class Motherboard {
                         System.out.println("Sorry cannot log you in at this time");
                         test = false;
                         break;
-                    }
+                    }else if(currentUser.equals("0")){customerLogin(screen);}
                     returningCustomer(screen, currentUser);
                     test = false;
                     break;
@@ -32,9 +34,12 @@ public class Motherboard {
     }
 
     public Customer validateCredentials(Workflow screen) {
+        screen.returningUserSP();
         String newUsername = screen.getUserSP();
         int counter = 0;
         int tries = 3;
+
+        if(newUsername.equals("0")){customerLogin(screen);}
 
         while(Database.getCustomerByUsername(newUsername) == null) {
             System.out.println("Account not on file");
@@ -45,24 +50,30 @@ public class Motherboard {
 
         while(counter < 3) {
             String userPass = screen.getPassSP();
+            if(userPass.equals("0")){customerLogin(screen);}
             if (currentUser.getPassword().equals(userPass)) {
                 return currentUser;
             } else
+
                 counter++;
                 tries--;
                 System.out.println(String.format("Invalid password: Tries left - %s", tries));
         }
-
         return null;
     }
 
     public void createCustomer() {
         Workflow screen = new Workflow();
         Customer newCustomer = Creator.createCustomer(null, null, null, null);
+
+        screen.newCustomerNameSP();
         String newCustomerName = screen.getCustomerNameSP();
         newCustomer.setCustomerName(newCustomerName);
+        if(newCustomerName.equals("0")){customerLogin(screen);}
+
         screen.newUserSP();
         String newUsername = screen.getUserSP();
+        if(newUsername.equals("0")){customerLogin(screen);}
         boolean user = true;
 
         while (user)
@@ -78,10 +89,11 @@ public class Motherboard {
         while (pass) {
             String newPassword = screen.getPassSP();
             String newPasswordConfirm = screen.getPassSP();
+            if(newPassword.equals("0") || newPasswordConfirm.equals("0")){customerLogin(screen);}
             if (newPasswordConfirm.equals(newPassword)) {
                 newCustomer.setPassword(newPassword);
                 pass = false;
-            } else {
+            }else {
                 screen.passwordMismatchSP();
             }
         }
@@ -90,7 +102,6 @@ public class Motherboard {
         openingAccount(screen, newCustomer);
         Database.addCustomer(newCustomer);
     }
-
 
     public void returningCustomer(Workflow screen, Customer customer){
         boolean currentlyUsing = true;
@@ -124,8 +135,12 @@ public class Motherboard {
                     history(screen);
                     break;
                 case 8:
+                    wireTransfer(screen, customer);
+                    break;
+                case 9:
                     screen.logOutSP();
                     currentlyUsing = false;
+                    break;
             }
         }
     }
@@ -206,7 +221,8 @@ public class Motherboard {
                 break;
             }
             else {
-                System.out.println("Account balance must be ZERO.\nRemaining balance: $"+customer.getAccount(oldAccount).getBalance());
+                System.out.println("Account balance must be ZERO.\n" +
+                        "Remaining balance: $" +customer.getAccount(oldAccount).getBalance());
                 break;
             }
         }
@@ -261,5 +277,43 @@ public class Motherboard {
 
     public void history(Workflow screen){
         screen.printHistory();
+    }
+
+    public void wireTransfer(Workflow screen, Customer customer) {
+
+        Integer withdrawAccount = screen.enterAccount();
+        while(customer.getAccount(withdrawAccount) == null) {
+            System.out.println("Account not on file");
+            withdrawAccount = screen.enterAccount();
+        }
+
+        System.out.println("please enter the username you want to transfer to");
+        String toTransfer = screen.getUserSP2();
+
+        while(Database.getCustomerByUsername(toTransfer) == null) {
+            System.out.println("Account not on file");
+            toTransfer= screen.getUserSP2();
+        }
+
+        Customer transferUser = Database.getCustomerByUsername(toTransfer);
+
+        boolean validAmount = true;
+        screen.transfer2UserPromptSP();
+
+        Integer depositAccount = screen.enterAccount();
+        while(transferUser.getAccount(depositAccount) == null) {
+            System.out.println("Account not on file");
+            depositAccount = screen.enterAccount();
+        }
+
+        while (validAmount) {
+            double transferAmount = screen.amountPromptSP();
+            if (customer.getAccount(withdrawAccount).getBalance() >= transferAmount) {
+                customer.getAccount(withdrawAccount).withdraw(transferAmount);
+                transferUser.getAccount(depositAccount).deposit(transferAmount);
+                validAmount = false;
+            } else System.out.println("Non sufficient funds");
+        }
+        screen.completeResultSP(customer.getAccount(withdrawAccount), transferUser.getAccount(depositAccount));
     }
 }
