@@ -5,6 +5,8 @@ public class Main {
     private boolean engineOn = true;
 
     public static void main(String[] args) {
+        Main main = new Main();
+        Motherboard ATM = new Motherboard();
         Workflow screen = new Workflow();
         Customer xiong = Creator.createCustomer("xiong", "xyuan", "zipcode", new Checking(100, 1500), new Savings(1000, 2500), new Investment(10000, 6000));
         Customer mike = Creator.createCustomer("mike", "ninh", "zipcode", new Checking(101, 1500), new Savings(1001, 2500), new Investment(10001, 6000));

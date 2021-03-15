@@ -17,7 +17,7 @@ public class CustomerTest {
             String actualName = xiong.getCustomerName();
             String actualUserName = xiong.getUserName();
             String actualPassword = xiong.getPassword();
-            String account = "24231\n" + "111\n";
+            String account = "Accounts: \n1 : 24231\n2 : 111\n";
             String actualAccount = xiong.getAccountNumber();
 
             // : Then
@@ -134,7 +134,7 @@ public class CustomerTest {
             Account investAccount = new Investment(111, 50000);
             Account[] accounts = new Account[]{checkingAccount, savingsAccount, investAccount};
             // : When
-            String account = "32563\n" + "992223\n" + "111\n";
+            String account = "Accounts: \n1 : 32563\n" + "2 : 992223\n" + "3 : 111\n";
             Customer wayne = new Customer(customerName, userName, password, accounts);
             String actualAccount = wayne.getAccountNumber();
 
@@ -173,7 +173,7 @@ public class CustomerTest {
         Account investAccount = new Investment(111, 50000);
         Account[] accounts = new Account[]{checkingAccount, savingsAccount, investAccount};
         // : When
-        String account = "32563\n" + "992223\n" + "111\n";
+        String account = "Accounts: \n1 : 32563\n" + "2 : 992223\n" + "3 : 111\n";
         Customer wayne = new Customer(customerName, userName, password, accounts);
         wayne.getAccount(111).withdraw(10000);
         wayne.closeAccount(111);
@@ -195,7 +195,7 @@ public class CustomerTest {
         Account investAccount = new Investment(111, 50000);
         Account[] accounts = new Account[]{checkingAccount, savingsAccount, investAccount};
         // : When
-        String account = "32563\n" + "992223\n";
+        String account = "Accounts: \n1 : 32563\n" + "2 : 992223\n";
         Customer wayne = new Customer(customerName, userName, password, accounts);
         wayne.getAccount(111).withdraw(50000);
         wayne.closeAccount(111);

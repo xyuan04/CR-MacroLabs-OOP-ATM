@@ -39,9 +39,9 @@ public class Customer {
     }
 
     public String getAccountNumber() {
-        String accountNumbers = "";
+        String accountNumbers = "Accounts: \n";
         for(int i = 0; i < accounts.size(); i++) {
-            accountNumbers += String.format("%s\n", accounts.get(i).getAccountNumber());
+            accountNumbers += String.format("%d : %s\n", i+1, accounts.get(i).getAccountNumber());
         }
         return accountNumbers;
     }
